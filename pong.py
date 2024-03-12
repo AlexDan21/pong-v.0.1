@@ -4,7 +4,7 @@ pygame.init()
 
 WIDTH, HEIGHT = 1280, 720
 
-FONT = pygame.font.SysFont("Consolas", int(WIDTH/20))
+FONT = pygame.font.SysFont("Consolas", int(WIDTH/20), True)
 
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Pong!")
@@ -30,25 +30,25 @@ while True:
         if player.top > 0:
             player.top -= 2
         if player.top == 0:
-            player.top = 0
+            player.top = player.top + 10
     if keys_pressed[pygame.K_DOWN]:
         if player.top < HEIGHT:
             player.top += 2
         if player.bottom == HEIGHT:
-            player.bottom = HEIGHT
+            player.bottom = HEIGHT - 10
     if ball.y <= 0:
         y_speed = 1
     if  ball.y >= HEIGHT:
         y_speed = -1
-    if ball.y <= 0:
+    if ball.x <= 0:
         player_score += 1
-       # ball.center = (WIDTH/2, HEIGHT/2)
-        #x_speed, y_speed = random.choice([1, -1]), random.choice([1, -1])
+        ball.center = (WIDTH/2, HEIGHT/2)
+        x_speed, y_speed = random.choice([1, -1]), random.choice([1, -1])
         y_speed = 1
-    if ball.y >= WIDTH:
+    if ball.x >= WIDTH:
        opponent_score += 1
-       # ball.center = (WIDTH/2, HEIGHT/2)
-       # x_speed, y_speed = random.choice([1, -1]), random.choice([1, -1])
+       ball.center = (WIDTH/2, HEIGHT/2)
+       x_speed, y_speed = random.choice([1, -1]), random.choice([1, -1])
        y_speed = 1
        
     if player.x - ball.width <= ball.x <= player.x and ball.y in range(player.top-ball.width, player.bottom+ball.width):
